@@ -1,0 +1,288 @@
+{
+	"info": {
+		"_postman_id": "eee9019c-fbcc-4d3f-9e25-a9683b0401b1",
+		"name": "USER-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19922972"
+	},
+	"item": [
+		{
+			"name": "Endpoint actualizado",
+			"item": [
+				{
+					"name": "GET User for ID-Resolve Errors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar Estatus de Respuesta debe ser 403 Forbidden\", function(){\r",
+									"pm.response.to.have.status(403).and.to.have.status(\"Forbidden\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validando nombre del Servidor\", function(){\r",
+									"pm.response.to.have.header(\"Server\",\"Cowboy\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar el Environments del entorno de prueba\", function(){\r",
+									"pm.expect(pm.environment.name).to.equal(\"GET User for ID-Resolve Errors\");\r",
+									"});\r",
+									"\r",
+									"/** ALMACENAR NUESTRA RESPUESTA EN UNA VARIBLE */\r",
+									"\r",
+									"const jsonData=pm.response.json();\r",
+									"\r",
+									"pm.test(\"Respuesta contiene 4 elementos\", function(){\r",
+									"pm.expect(Object.keys(jsonData.error[0]).length).to.equal(4);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Valida campo param debe ser igual a id\", function(){\r",
+									"    pm.expect(jsonData.error[0].param).to.equal(\"id\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar campo location debe ser igual a param\", function(){\r",
+									"pm.expect(jsonData.error[0].location).to.\r",
+									"equal(\"params\");\r",
+									"});\r",
+									"\r",
+									"    /** Agregar campos faltantes y validarlos */\r",
+									"\r",
+									"    pm.test (\"Validar campo de imagen debe ser igual a El id 62422b067dc65cb9fc77e232 no existe.\", function(){\r",
+									"    pm.expect(jsonData.error[0].msg).to.equal(\"El id 62422b067dc65cb9fc77e232 no existe.\");\r",
+									"});\r",
+									"\r",
+									"    pm.test (\"Validar campo value debe ser igual a 62422b067dc65cb9fc77e232\", function(){\r",
+									"    pm.expect(jsonData.error[0].value).to.equal(\"62422b067dc65cb9fc77e232\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users/{{UseriId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{UseriId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET All Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"/**VALIDAR LA RESPAUESTA */\r",
+									"\r",
+									"pm.test(\"El estatus de la respuesta deb ser 200 y OK\", function(){\r",
+									"pm.response.to.have.status(200).and.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"/**VALIDAR LOS ELEMENTOS DEL ARRAY */\r",
+									"const jsonData=pm.response.json();\r",
+									"pm.test(\"Validar la cantidad de campos que tiene la respuesta en el usuario de posicion 0\", function(){\r",
+									"pm.expect(Object.keys(jsonData.users[0]).length).to.equal(7);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar la cantidad de campos que tiene la respuesta en el usuario de posicion 1\", function(){\r",
+									"pm.expect(Object.keys(jsonData.users[1]).length).to.equal(7);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar la cantidad de elementos del ARRAY\", function(){\r",
+									"pm.expect(Object.keys(jsonData.users).length).to.equal(5);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET User for ID- New User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar Estatus de respuesta debe ser 200 OK\", function(){\r",
+									"pm.response.to.have.status(200).and.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar nombre del Servidor\",function(){\r",
+									"pm.response.to.have.header(\"Server\",\"Cowboy\");\r",
+									"});\r",
+									"\r",
+									"/** ALMACENAR NUESTRA RESPAUESTA EN UNA VARIABLE */\r",
+									"\r",
+									"const  jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Validar User.Name\", function(){\r",
+									"pm.expect(jsonData.user.name).to.equal(\"Test 1\");\r",
+									"});\r",
+									"\r",
+									"/** AGREGAR CAMPOS FALTANTES Y VALIDARLOS */\r",
+									"\r",
+									"pm.test(\"Validar el Campo Emal\", function(){\r",
+									"pm.expect(jsonData.user.email).to.equal(\"test1@test.com\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar el Campo Imagen\", function(){\r",
+									"pm.expect(jsonData.user.img).to.equal(\"/imaages/01.png\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar el Campo Rol\", function(){\r",
+									"pm.expect(jsonData.user.rol).to.equal(\"ADMIN_ROL\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar el Campo Status\", function(){\r",
+									"pm.expect(jsonData.user.status).to.be.true;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar el Campo User id\", function(){\r",
+									"pm.expect(jsonData.user.uid).to.equal(\"623dd8a918c514bc1bcf850f\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users/623dd8a918c514bc1bcf850f",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"623dd8a918c514bc1bcf850f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET User for ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"/**VALIDAR LA RESPUESTA DEL STATUS */\r",
+									"pm.test(\"Validar Estatus debe ser igual a 200 OK\", function(){\r",
+									"pm.response.to.have.status(200).and.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"/**VALIDAR EL HEADERS */\r",
+									"\r",
+									"pm.test(\"Validar el Server debe ser igual a Cowboy\", function(){\r",
+									"pm.response.to.have.header(\"Server\",\"Cowboy\");\r",
+									"});\r",
+									"\r",
+									"/** ALMACENAR LA RESPUESTA EN UNA VARIABLE */\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"/** VALIDAR LA RESPUESTA DEL BODY */\r",
+									"\r",
+									"pm.test(\"Valaidar el User-Name\", function(){\r",
+									"pm.expect(jsonData.user.name).to.equal(\"Mikel\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar el Campo Email\", function(){\r",
+									"pm.expect(jsonData.user.email).to.equal(\"user@gmail.com\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar el campo Imagen\", function(){\r",
+									"pm.expect(jsonData.user.img).to.equal(\"/imaages/01.png\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar el Rol del Usuario\", function(){\r",
+									"pm.expect(jsonData.user.rol).to.equal(\"ADMIN_ROL\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar que el estatus es True\", function(){\r",
+									"pm.expect(jsonData.user.status).to.be.true;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar que el estatus de Google es False\", function(){\r",
+									"pm.expect(jsonData.user.google).to.be.false;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar que el Id es iugual a 623dd8db18c514bc1bcf8517\", function(){\r",
+									"pm.expect(jsonData.user.uid).to.equal(\"623dd8db18c514bc1bcf8517\");\r",
+									"});\r",
+									"\r",
+									"/*CANTIDAD DE CAMPOS EN LA RESPUESTAS*/\r",
+									"\r",
+									"pm.test(\"Validar la cantidad de campos es igual a 7\", function(){\r",
+									"pm.expect(Object.keys(jsonData.user).length).to.equal(7);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users/623dd8db18c514bc1bcf8517",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"623dd8db18c514bc1bcf8517"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
