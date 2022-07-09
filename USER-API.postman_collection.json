@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "eee9019c-fbcc-4d3f-9e25-a9683b0401b1",
+		"_postman_id": "5ea030e4-5123-44dc-8914-3c58629450a3",
 		"name": "USER-API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "19922972"
+		"_exporter_id": "7726403"
 	},
 	"item": [
 		{
@@ -40,10 +40,6 @@
 									"    pm.expect(jsonData.error[0].param).to.equal(\"id\");\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Validar campo location debe ser igual a param\", function(){\r",
-									"pm.expect(jsonData.error[0].location).to.\r",
-									"equal(\"params\");\r",
-									"});\r",
 									"\r",
 									"    /** Agregar campos faltantes y validarlos */\r",
 									"\r",
